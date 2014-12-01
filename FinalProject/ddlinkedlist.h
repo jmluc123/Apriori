@@ -15,10 +15,12 @@
 #ifndef DDLINKEDLIST_H
 #define DDLINKEDLIST_H
 
-template <class T>
+#include "header.h"
+
+template <typename T>
 class DDLinkedList
 {
-	template <class T>
+	template <typename T>
 	struct Node
 	{
 		T       mData;

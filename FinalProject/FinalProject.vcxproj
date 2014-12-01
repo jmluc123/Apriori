@@ -77,8 +77,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="candidate.h" />
+    <ClInclude Include="Database.h" />
     <ClInclude Include="ddlinkedlist.h" />
     <ClInclude Include="header.h" />
+    <ClInclude Include="transaction.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="functions.cpp" />

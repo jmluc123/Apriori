@@ -1,8 +1,14 @@
+#ifndef HEADER_H
+#define HEADER_H
+
 #include <iostream>
 
 using namespace std;
 
-#include "DDLinkedList.h"
+#include "ddlinkedlist.h"
+#include "candidate.h"
+#include "transaction.h"
+#include "Database.h"
 
 
 
@@ -12,3 +18,5 @@ bool isExist(int *&structure, int data, int capacity);
 void aDisplay(int *&structure, int count);
 void bubbleSort(int list[], int size);
 void reverseSort(int list[], int n);
+
+#endif
