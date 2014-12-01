@@ -3,7 +3,7 @@
 
 #include "header.h"
 
-template <typname T>
+template <typename T>
 class Database
 {
 	Transaction** mDatabase; //array of transaction pointers
@@ -12,9 +12,9 @@ class Database
 public:
 	Database(int count, int average);
 	Transaction* getIndex(int index);
-	setIndex(Transaction*& transaction, index);
-	appendTransaction(Transaction* transaction); //add a transaction to the end
-	clear();
+	void setIndex(Transaction*& transaction, int index);
+	void appendTransaction(Transaction* transaction); //add a transaction to the end
+	void clear();
 	~Database();
 };
 

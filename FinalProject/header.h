@@ -8,7 +8,7 @@ using namespace std;
 #include "ddlinkedlist.h"
 #include "candidate.h"
 #include "transaction.h"
-#include "Database.h"
+#include "database.h"
 
 
 
