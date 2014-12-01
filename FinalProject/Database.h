@@ -16,6 +16,7 @@ public:
 	void appendTransaction(Transaction* transaction); //add a transaction to the end
 	void clear();
 	~Database();
+	void apriori();
 };
 
 
