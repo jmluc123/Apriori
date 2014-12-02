@@ -11,7 +11,7 @@
 *  Certification of Authenticity:
 *     I certify that changes to this assignment are entirely my own work.
 **********************************************************************/
-
+/* Josh Double Check DDLinkedList of Candidates*/
 #ifndef DDLINKEDLIST_H
 #define DDLINKEDLIST_H
 

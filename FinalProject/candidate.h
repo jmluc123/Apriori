@@ -1,6 +1,6 @@
 #ifndef CANDIDATE_H
 #define CANDIDATE_H
-
+/* Ryan */
 #include "header.h"
 
 template <typename T>

@@ -19,4 +19,6 @@ void aDisplay(int *&structure, int count);
 void bubbleSort(int list[], int size);
 void reverseSort(int list[], int n);
 
+void presentMain();
+
 #endif
