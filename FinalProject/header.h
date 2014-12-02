@@ -2,6 +2,9 @@
 #define HEADER_H
 
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
 
 using namespace std;
 

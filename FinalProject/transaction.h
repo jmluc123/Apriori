@@ -16,6 +16,7 @@ public:
 	int getItem(int index);
 	int getCount(int index);
 	void setItem(int index, int item);
+	void setID(int id);
 	void clear();
 };
 

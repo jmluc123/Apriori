@@ -1,16 +1,25 @@
-﻿Build started 12/2/2014 4:47:48 PM.
+﻿Build started 12/2/2014 6:54:32 PM.
      1>Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt functions.cpp main.cpp
          main.cpp
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(30): error C2512: 'Transaction' : no appropriate default constructor available
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(29) : while compiling class template member function 'Database<int>::Database(int,int)'
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\main.cpp(6) : see reference to function template instantiation 'Database<int>::Database(int,int)' being compiled
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\main.cpp(6) : see reference to class template instantiation 'Database<int>' being compiled
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(59): error C2143: syntax error : missing ';' before '<'
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(43) : while compiling class template member function 'void Database<int>::load(void)'
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\main.cpp(7) : see reference to function template instantiation 'void Database<int>::load(void)' being compiled
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(60): error C2065: 'transaction' : undeclared identifier
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(60): error C2227: left of '->setItem' must point to class/struct/union/generic type
+                 type is 'unknown-type'
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(61): error C2065: 'transaction' : undeclared identifier
+         Generating Code...
+         Compiling...
          functions.cpp
          Generating Code...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\Debug\FinalProject.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\Debug\FinalProject.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\Debug\FinalProject.lib" /MACHINE:X86 Debug\functions.obj
-         Debug\main.obj
-         FinalProject.vcxproj -> C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\Debug\FinalProject.exe
-     1>Done Building Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:01.23
+Time Elapsed 00:00:00.74

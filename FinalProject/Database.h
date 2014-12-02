@@ -29,12 +29,43 @@ Database<T>::Database(int count, int average)
 {
 	mDatabase = new Transaction[count];
 	mTransactionCount = count;
-	average = mAverageSize;
+	mAverageSize = average;
 }
 
 template <typename T>
 Database<T>::~Database()
 {
 	delete[] mDatabase;
+}
+
+template <typename T>
+void Database<T>::load()
+{
+	ifstream theFile("transactions.txt");
+	if (theFile.is_open())
+	{
+		string line;
+		int count = 0;
+		int i = 0;
+		while (getline(theFile, line))
+		{
+			int* itemArray = new int[mAverageSize * 20];
+			count = 0;
+			stringstream stream(line);
+			while (stream >> itemArray[i])
+			{
+				count++;
+			}
+			Transaction<T>* transaction = new Transaction<T>(itemArray[0],count);
+			for (int iterate = 1; iterate <= count; iterate++) transaction->setItem(iterate - 1, itemArray[iterate]);
+			mDatabase[i] = transaction;
+			delete[] itemArray;
+			i++;
+		}
+	}
+	else
+	{
+		cout << "Error opening file...\n";
+	}
 }
 #endif
