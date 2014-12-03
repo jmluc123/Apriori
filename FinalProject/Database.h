@@ -93,12 +93,14 @@ void Database<T>::apriori()
 					if (candidate->compare(ctCandidate)) candidate->mRepeatCount++; //if there is a match increment mRepeatCount for CK candidate
 				}
 			}
+			delete CT;
 		}
+		delete LK_1;
 		LK_1 = prune(CK); //prune all lists from CK that don't have the required mRepeatCount
+		writeList(LK_1);
+		delete CK;
 	}
 	delete LK_1;
-	delete CK;
-	delete CT;
 }
 
 template <typename T>
