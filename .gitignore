@@ -1,6 +1,7 @@
 # Visual Studio
 *.suo
 *.sdf
+*.opensdf
 
 # Compiled Object files
 *.slo

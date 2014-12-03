@@ -8,11 +8,15 @@ class Candidate : public DDLinkedList<T>
 {
 public:
 	int mRepeatCount; //c.count for each candidate
-	bool compare(Candidate<T>*); //not sure
+	bool compare(Candidate<T>*); //comparing a candidate in CK with candidates in CT to get c.count
 	bool pruneCheck(DDLinkedList<Candidate<T>*>*); //see if list needs to be pruned out of C[4]
 };
 
-
+template <typename T>
+bool Candidate<T>::compare(Candidate<T>* candidate)
+{
+	return new Candidate<T>();
+}
 
 
 

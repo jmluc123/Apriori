@@ -1,8 +1,31 @@
-﻿Build started 12/2/2014 7:07:58 PM.
+﻿Build started 12/3/2014 1:31:30 PM.
      1>Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt functions.cpp main.cpp
          main.cpp
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\candidate.h(18): warning C4800: 'Candidate<T> *' : forcing value to bool 'true' or 'false' (performance warning)
+                 with
+                 [
+                     T=int
+                 ]
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\candidate.h(17) : while compiling class template member function 'bool Candidate<T>::compare(Candidate<T> *)'
+                 with
+                 [
+                     T=int
+                 ]
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(93) : see reference to function template instantiation 'bool Candidate<T>::compare(Candidate<T> *)' being compiled
+                 with
+                 [
+                     T=int
+                 ]
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(93) : see reference to class template instantiation 'Candidate<T>' being compiled
+                 with
+                 [
+                     T=int
+                 ]
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(75) : while compiling class template member function 'void Database<int>::apriori(void)'
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\main.cpp(8) : see reference to function template instantiation 'void Database<int>::apriori(void)' being compiled
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\main.cpp(6) : see reference to class template instantiation 'Database<int>' being compiled
          Generating Code...
          Compiling...
          functions.cpp
@@ -15,4 +38,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.29
+Time Elapsed 00:00:01.31
