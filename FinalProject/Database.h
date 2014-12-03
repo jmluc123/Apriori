@@ -22,7 +22,6 @@ public:
 	DDLinkedList<Candidate<T>*>* aprioriGen(DDLinkedList<Candidate<T>*>*); //Ryan
 	DDLinkedList<Candidate<T>*>* subset(DDLinkedList<Candidate<T>*>*, int);  //Josh
 	DDLinkedList<Candidate<T>*>* prune(DDLinkedList<Candidate<T>*>*); //Josh prune CK for next LK
-	
 };
 
 template <typename T>
@@ -78,8 +77,11 @@ void Database<T>::apriori()
 	DDLinkedList<Candidate<T>*>* CT;
 	Candidate<T>* candidate;
 	Candidate<T>* ctCandidate;
+	double time;
+	TimerSystem timer;
 	while (!LK_1->isEmpty())
 	{
+		timer.startClock();
 		CK = aprioriGen(LK_1);
 		for (int i = 0; i < mTransactionCount; i++) //for each transaction in database
 		{
@@ -97,7 +99,8 @@ void Database<T>::apriori()
 		}
 		delete LK_1;
 		LK_1 = prune(CK); //prune all lists from CK that don't have the required mRepeatCount
-		writeList(LK_1);
+		time = timer.getTime();
+		writeList(LK_1, time);
 		delete CK;
 	}
 	delete LK_1;
@@ -126,4 +129,11 @@ DDLinkedList<Candidate<T>*>* Database<T>::prune(DDLinkedList<Candidate<T>*>* ddl
 {
 	return new DDLinkedList<Candidate<T>*>();
 }
+
+template <typename T>
+void Database<T>::writeList(DDLinkedList<Candidate<T>*>* ddlinkedlist, double time)
+{
+
+}
+
 #endif

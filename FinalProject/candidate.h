@@ -15,7 +15,7 @@ public:
 template <typename T>
 bool Candidate<T>::compare(Candidate<T>* candidate)
 {
-	return new Candidate<T>();
+	return false;
 }
 
 
