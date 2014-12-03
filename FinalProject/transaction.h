@@ -3,6 +3,7 @@
 /* Ryan */
 #include "header.h"
 
+template <typename T>
 class Transaction
 {
 private:
@@ -12,6 +13,7 @@ private:
 
 public:
 	Transaction(int id, int count);
+	Transaction();
 	~Transaction();
 	int getItem(int index);
 	int getCount(int index);
@@ -19,6 +21,25 @@ public:
 	void setID(int id);
 	void clear();
 };
+
+/*
+template <typename T>
+Transaction<T>::Transaction()
+{
+
+}
+*/
+
+template <typename T>
+Transaction<T>::Transaction(int id, int count)
+{
+
+}
+
+template <typename T>
+void Transaction<T>::setItem(int index, int item)
+{
+}
 
 
 

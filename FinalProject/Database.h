@@ -6,13 +6,13 @@
 template <typename T>
 class Database
 {
-	Transaction** mDatabase; //array of transaction pointers
+	Transaction<T>** mDatabase; //array of transaction pointers
 	int mTransactionCount; //number of transactions
 	int mAverageSize;  //average size of transactions
 public:
 	Database(int count, int average);  //Josh
-	Transaction* getIndex(int index);  //Ryan
-	void appendTransaction(Transaction* transaction); //add a transaction to the end //Ryan
+	Transaction<T>* getIndex(int index);  //Ryan
+	void appendTransaction(Transaction<T>* transaction); //add a transaction to the end //Ryan
 	void load(); //load file into mDatabase  //Josh
 	void writeList(DDLinkedList<Candidate<T>*>*, double);  //write L[k] and time to file //Ryan
 	~Database(); //delete transactions
@@ -27,7 +27,7 @@ public:
 template <typename T>
 Database<T>::Database(int count, int average)
 {
-	mDatabase = new Transaction[count];
+	mDatabase = new Transaction<T>*[count];
 	mTransactionCount = count;
 	mAverageSize = average;
 }
