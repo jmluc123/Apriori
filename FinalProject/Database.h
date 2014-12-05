@@ -85,7 +85,10 @@ void Database<T>::load()
 				count++;
 			}
 			Transaction<T>* transaction = new Transaction<T>(itemArray[0],count);
-			for (int iterate = 1; iterate <= count; iterate++) transaction->setItem(iterate - 1, itemArray[iterate]);
+			for (int iterate = 1; iterate <= count; iterate++)
+			{
+				transaction->setItem(iterate - 1, itemArray[iterate]);
+			}
 			mDatabase[i] = transaction;
 			delete[] itemArray;
 			i++;
@@ -95,6 +98,7 @@ void Database<T>::load()
 	{
 		cout << "Error opening file...\n";
 	}
+
 }
 
 template <typename T>
@@ -219,7 +223,7 @@ DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>
 
 			//prune while joining
 
-			for (int j = 0; j < tmp->getCount(); j++)
+			for (int x = 0; x < tmp->getCount(); x++)
 			{//for each member of tmp
 				int copyCount = 0;
 				Candidate<T>* toCheck = tmp->getData(j);

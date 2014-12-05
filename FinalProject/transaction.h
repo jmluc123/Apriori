@@ -53,6 +53,7 @@ Transaction<T>::Transaction(int id, int count)
 {
 	mID = id;
 	mItems = new int[count];
+	mCount = count;
 }
 
 template <typename T>
@@ -60,7 +61,7 @@ void Transaction<T>::setItem(int index, T item)
 {
 	if (index >= mCount)
 	{
-		cout << "Index out of range...\n";
+		cout << "Transaction Index out of range (setItem)...\n";
 		return;
 	}
 	mItems[index] = item;
@@ -71,7 +72,7 @@ T Transaction<T>::getItem(int index)
 {
 	if (index >= mCount)
 	{
-		cout << "Index out of range...\n";
+		cout << "Transaction Index out of range (getItem)...\n";
 		return NULL;
 	}
 	return mItems[index];
