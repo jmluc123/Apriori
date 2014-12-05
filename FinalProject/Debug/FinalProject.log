@@ -1,18 +1,55 @@
-﻿Build started 12/3/2014 2:07:22 PM.
+﻿Build started 12/4/2014 9:58:04 PM.
      1>Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt functions.cpp main.cpp timerSystem.cpp
          timerSystem.cpp
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(23): error C2061: syntax error : identifier 'Candidate'
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(24) : see reference to class template instantiation 'Transaction<T>' being compiled
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(79): error C2059: syntax error : '='
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(108): error C2244: 'BST_Node_Candidate::{ctor}' : unable to match function definition to an existing declaration
+                 definition
+                 'BST_Node_Candidate::BST_Node_Candidate(Candidate<int> *,BST_Node_Candidate *,BST_Node_Candidate *)'
+                 existing declarations
+                 'BST_Node_Candidate::BST_Node_Candidate(const BST_Node_Candidate &)'
+                 'BST_Node_Candidate::BST_Node_Candidate(Candidate<int> *,BST_Node_Candidate *,BST_Node_Candidate *)'
+                 'BST_Node_Candidate::BST_Node_Candidate(Candidate<int> *)'
+                 'BST_Node_Candidate::BST_Node_Candidate(void)'
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(112): error C2664: 'bool Candidate<int>::isIn(Transaction *)' : cannot convert argument 1 from 'Transaction<int> *' to 'Transaction *'
+                 Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\hash_table.h(58): error C2039: 'contains' : is not a member of 'BSTHashTable<T>'
          main.cpp
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(23): error C2061: syntax error : identifier 'Candidate'
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(24) : see reference to class template instantiation 'Transaction<T>' being compiled
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(79): error C2059: syntax error : '='
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(108): error C2244: 'BST_Node_Candidate::{ctor}' : unable to match function definition to an existing declaration
+                 definition
+                 'BST_Node_Candidate::BST_Node_Candidate(Candidate<int> *,BST_Node_Candidate *,BST_Node_Candidate *)'
+                 existing declarations
+                 'BST_Node_Candidate::BST_Node_Candidate(const BST_Node_Candidate &)'
+                 'BST_Node_Candidate::BST_Node_Candidate(Candidate<int> *,BST_Node_Candidate *,BST_Node_Candidate *)'
+                 'BST_Node_Candidate::BST_Node_Candidate(Candidate<int> *)'
+                 'BST_Node_Candidate::BST_Node_Candidate(void)'
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(112): error C2664: 'bool Candidate<int>::isIn(Transaction *)' : cannot convert argument 1 from 'Transaction<int> *' to 'Transaction *'
+                 Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\hash_table.h(58): error C2039: 'contains' : is not a member of 'BSTHashTable<T>'
          functions.cpp
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(23): error C2061: syntax error : identifier 'Candidate'
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(24) : see reference to class template instantiation 'Transaction<T>' being compiled
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(79): error C2059: syntax error : '='
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(108): error C2244: 'BST_Node_Candidate::{ctor}' : unable to match function definition to an existing declaration
+                 definition
+                 'BST_Node_Candidate::BST_Node_Candidate(Candidate<int> *,BST_Node_Candidate *,BST_Node_Candidate *)'
+                 existing declarations
+                 'BST_Node_Candidate::BST_Node_Candidate(const BST_Node_Candidate &)'
+                 'BST_Node_Candidate::BST_Node_Candidate(Candidate<int> *,BST_Node_Candidate *,BST_Node_Candidate *)'
+                 'BST_Node_Candidate::BST_Node_Candidate(Candidate<int> *)'
+                 'BST_Node_Candidate::BST_Node_Candidate(void)'
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(112): error C2664: 'bool Candidate<int>::isIn(Transaction *)' : cannot convert argument 1 from 'Transaction<int> *' to 'Transaction *'
+                 Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\hash_table.h(58): error C2039: 'contains' : is not a member of 'BSTHashTable<T>'
          Generating Code...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\Debug\FinalProject.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\Debug\FinalProject.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\Debug\FinalProject.lib" /MACHINE:X86 Debug\functions.obj
-         Debug\main.obj
-         Debug\timerSystem.obj
-         FinalProject.vcxproj -> C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\Debug\FinalProject.exe
-     1>Done Building Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:02.44
+Time Elapsed 00:00:02.14

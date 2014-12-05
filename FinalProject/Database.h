@@ -16,7 +16,7 @@ public:
 	void load(); //load file into mDatabase  //Josh
 	void writeList(DDLinkedList<Candidate<T>*>*, double);  //write L[k] and time to file //Ryan
 	~Database(); //delete transactions
-	void apriori();  // Josh. calls extract then while loop which calls apriori-gen, subset and writeList
+	void apriori(int minsup);  // Josh. calls extract then while loop which calls apriori-gen, subset and writeList
 	DDLinkedList<Candidate<T>*>* extract();//get L[1] list from database  Ryan
 	//void aprioriMain(DDLinkedList<Candidate<T>*>*); //pass in L[k-1] make this into a while loop
 	DDLinkedList<Candidate<T>*>* aprioriGen(DDLinkedList<Candidate<T>*>*); //Ryan
@@ -52,7 +52,7 @@ void Database<T>::load()
 			int* itemArray = new int[mAverageSize * 20];
 			count = 0;
 			stringstream stream(line);
-			while (stream >> itemArray[i])
+			while (stream >> itemArray[count])
 			{
 				count++;
 			}
@@ -70,7 +70,7 @@ void Database<T>::load()
 }
 
 template <typename T>
-void Database<T>::apriori()
+void Database<T>::apriori(int minsup)
 {
 	DDLinkedList<Candidate<T>*>* LK_1 = extract();
 	DDLinkedList<Candidate<T>*>* CK;
@@ -79,6 +79,7 @@ void Database<T>::apriori()
 	Candidate<T>* ctCandidate;
 	double time;
 	TimerSystem timer;
+	int k = 2;
 	while (!LK_1->isEmpty())
 	{
 		timer.startClock();
@@ -98,10 +99,11 @@ void Database<T>::apriori()
 			delete CT;
 		}
 		delete LK_1;
-		LK_1 = prune(CK); //prune all lists from CK that don't have the required mRepeatCount
+		LK_1 = prune(CK, minsup); //prune all lists from CK that don't have the required mRepeatCount
 		time = timer.getTime();
 		writeList(LK_1, time);
 		delete CK;
+		k++;
 	}
 	delete LK_1;
 }
@@ -119,9 +121,17 @@ DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>
 }
 
 template <typename T>
-DDLinkedList<Candidate<T>*>* Database<T>::subset(DDLinkedList<Candidate<T>*>* ddlinkedlist, int index)
+DDLinkedList<Candidate<T>*>* Database<T>::subset(DDLinkedList<Candidate<T>*>* CK, int index)
 {
-	return new DDLinkedList<Candidate<T>*>();
+	DDLinkedList<Candidate<T>*>* CT = new DDLinkedList<Candidate<T>*>();
+	BSTHashTable<T>* bsthashtable = new BSTHashTable(mAverageSize % 100);
+	Transaction<T>* transaction = mDatabase[index];
+	for (int i = 0; i < CK->mCount(); i++)
+	{
+		bsthashtable->add(CK->getData(i));
+	}
+	bsthashtable->prune(transaction, CT);
+	return CT;
 }
 
 template <typename T>

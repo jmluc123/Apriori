@@ -33,9 +33,6 @@
     <ClInclude Include="bst-node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bst.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -43,6 +40,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TimerSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hash_table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,5 +56,10 @@
     <ClCompile Include="timerSystem.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="transactions.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

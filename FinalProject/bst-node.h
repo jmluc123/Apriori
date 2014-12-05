@@ -15,28 +15,68 @@
 #define BST_NODE_H
 
 #include "header.h"
-using namespace std;
 
-template <typename T>
-struct BST_Node
+struct BST_Node_Candidate
 {
-	T           mData;
-	BST_Node<T> *mLeft, *mRight;
+	Candidate<int>* mCandidate;
+	BST_Node_Candidate *mLeft, *mRight;
 
-	BST_Node();
-	BST_Node(T data);
-	BST_Node(T data, BST_Node<T> *left, BST_Node<T> *right);
+	BST_Node_Candidate();
+	BST_Node_Candidate(Candidate<int>* candidate);
+	BST_Node_Candidate(Candidate<int>* candidate, BST_Node_Candidate *left, BST_Node_Candidate *right);
+	void add(Candidate<int>* candidate);
+	bool isExist(Candidate<int>* candidate);
+	~BST_Node_Candidate();
+	void prune(Transaction<int>*, DDLinkedList<Candidate<int>*>*, BST_Node_Candidate*);
 };
 
+
+BST_Node_Candidate::~BST_Node_Candidate()
+{
+
+}
+
+void BST_Node_Candidate::add(Candidate<int>* candidate)
+{
+	if (candidate->getData(0) < mCandidate->getData(0))
+	{
+		if (mLeft)
+			mLeft->add(candidate);
+		else
+			mLeft = new BST_Node_Candidate(candidate);
+	}
+	else if (candidate->getData(0) >= mCandidate->getData(0))
+	{
+		if (candidate->compare(mCandidate))
+		{
+			return;
+		}
+		if (mRight)
+			mRight->add(candidate);
+		else
+			mRight = new BST_Node_Candidate(candidate);
+	}
+}
+
+
+bool BST_Node_Candidate::isExist(Candidate<int>* candidate)
+{
+	bool exists = false;
+	exists = mLeft->isExist(candidate);
+	if (exists) return true;
+	exists = mRight->isExist(candidate);
+	if (exists) return true;
+	return false;
+
+}
 /*        Pre:  A BST is most likely initialized
 *     Post: a new node is initialized
 *  Purpose: create a new node for a BST
 ***************************************************************/
-template <typename T>
-BST_Node<T>::BST_Node()
+BST_Node_Candidate::BST_Node_Candidate()
 {
 	//add your code
-	mData = T();
+	mCandidate* = new Candidate<int>();
 	mLeft = NULL;
 	mRight = NULL;
 }
@@ -46,11 +86,10 @@ BST_Node<T>::BST_Node()
 *     Post: a new node is initialized with a given value
 *  Purpose: create a new node with a chosen value for a BST
 ***************************************************************/
-template <typename T>
-BST_Node<T>::BST_Node(T data)
+BST_Node_Candidate::BST_Node_Candidate(Candidate<int>* candidate)
 {
 	//add your code
-	mData = data;
+	mCandidate = candidate;
 	mLeft = NULL;
 	mRight = NULL;
 }
@@ -60,12 +99,19 @@ BST_Node<T>::BST_Node(T data)
 *  Purpose: initialize a new node with pre-attached nodes to a BST
 *****************************************************************/
 template <typename T>
-BST_Node<T>::BST_Node(T data, BST_Node<T> *left, BST_Node<T> *right)
+BST_Node_Candidate::BST_Node_Candidate(Candidate<int>* candidate, BST_Node_Candidate *left, BST_Node_Candidate *right)
 {
 	//add your code
-	mData = data;
+	mCandidate = candidate;
 	mLeft = left;
 	mRight = right;
+}
+
+void prune(Transaction<int>* transaction, DDLinkedList<Candidate<int>*>* CT, BST_Node_Candidate* node)
+{
+	if (node->mCandidate->isIn(transaction)) CT->insert(node->mCandidate);
+	prune(transaction, CT, node->mLeft);
+	prune(transaction, CT, node->mRight);
 }
 
 #endif

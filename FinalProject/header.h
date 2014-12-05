@@ -12,11 +12,11 @@ using namespace std;
 #include "TimerSystem.h"
 #include "node.h"
 #include "queue.h"
-#include "bst-node.h"
-#include "bst.h"
 #include "ddlinkedlist.h"
-#include "candidate.h"
 #include "transaction.h"
+#include "candidate.h"
+#include "bst-node.h"
+#include "hash_table.h"
 #include "database.h"
 
 

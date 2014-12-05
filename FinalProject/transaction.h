@@ -20,6 +20,7 @@ public:
 	void setItem(int index, int item);
 	void setID(int id);
 	void clear();
+	bool isExist(Candidate<T>* candidate);
 };
 
 /*
@@ -40,7 +41,6 @@ template <typename T>
 void Transaction<T>::setItem(int index, int item)
 {
 }
-
 
 
 

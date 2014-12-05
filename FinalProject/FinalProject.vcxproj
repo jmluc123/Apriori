@@ -77,10 +77,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="bst-node.h" />
-    <ClInclude Include="bst.h" />
     <ClInclude Include="candidate.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="ddlinkedlist.h" />
+    <ClInclude Include="hash_table.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="queue.h" />
@@ -91,6 +91,9 @@
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="timerSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="transactions.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
