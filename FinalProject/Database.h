@@ -195,7 +195,7 @@ DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>
 		k = toCopy1->getCount() + 1;
 
 		//fill tmp with p x q
-		for (int j = i + 1; j < Lkp->getCount(); i++)
+		for (int j = i + 1; j < Lkp->getCount(); j++)
 		{
 			Candidate<T>* toAdd = new Candidate<T>;
 			Candidate<T>* toCopy2 = Lkp->getData(j);
@@ -210,13 +210,11 @@ DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>
 			{
 				if (checkEquivalent(toAdd, tmp))
 					tmp->insert(toAdd);
-
 				//also add it to tracker
 				copyTracker->insert(toAdd);
 			}
 
 			//prune while joining
-
 			for (int j = 0; j < tmp->getCount(); j++)
 			{//for each member of tmp
 				int copyCount = 0;
@@ -224,7 +222,6 @@ DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>
 				for (int g = 0; g < copyTracker->getCount(); g++)
 				{//count how many of each set are in copyTracker					
 					Candidate<T>* copyCheck = copyTracker->getData(g);
-
 					if (copyCheck->operator==(toCheck))
 						copyCount++;
 				}
@@ -233,6 +230,8 @@ DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>
 					Ck->insert(tmp->getData(j));
 			}
 		}
+
+		delete copyTracker;
 	}
 	return Ck;
 }
@@ -298,7 +297,7 @@ void Database<T>::writeList(DDLinkedList<Candidate<T>*>* itemSet, double time)
 		candidate = itemSet->getData(i);
 		for (int j = 0; j < candidate->getCount(); j++)
 		{
-			if (j > 0 && j < candidate->getCount() - 1)
+			if (j > 0)
 				outFile << ",";
 			outFile << candidate->getData(j);
 		}
