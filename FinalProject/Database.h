@@ -215,13 +215,22 @@ DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>
 			if (toAdd->getCount() == k)
 			{
 				if (checkEquivalent(toAdd, tmp))
+				{
 					tmp->insert(toAdd);
+					if (k > 2)
+						Ck->insert(toAdd);
+				}	
 				//also add it to tracker
 				copyTracker->insert(toAdd);
 			}
+			
+			
+		}
 
+		if (k > 2)
+		{
 			//prune while joining
-			for (int x = 0; x < tmp->getCount(); x++)
+			for (int j = 0; j < tmp->getCount(); j++)
 			{//for each member of tmp
 				int copyCount = 0;
 				Candidate<T>* toCheck = tmp->getData(j);
