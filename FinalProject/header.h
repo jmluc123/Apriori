@@ -30,4 +30,12 @@ void reverseSort(int list[], int n);
 
 void presentMain();
 
+template <typename T>
+string toString(T value)
+{
+	stringstream ss;
+	ss << value;
+	return ss.str();
+}
+
 #endif
