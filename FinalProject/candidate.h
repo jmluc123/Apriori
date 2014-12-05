@@ -11,6 +11,7 @@ public:
 	bool compare(Candidate<T>*); //comparing a candidate in CK with candidates in CT to get c.count
 	bool pruneCheck(DDLinkedList<Candidate<T>*>*); //see if list needs to be pruned out of CK
 	bool isIn(Transaction* transaction); //see if candidate is contained in transaction
+	bool operator== (Candidate<T>*);
 };
 
 template <typename T>
@@ -42,6 +43,19 @@ bool isIn(Transaction<T>* transaction)
 		}
 	}
 	return allAreIn;
+}
+
+//check if sets are equal to eachother - rather than their addresses 
+template <typename T>
+bool Candidate<T>::operator== (Candidate<T>* other)
+{
+	for (int i = 0; i < other->getCount(); i++)
+	{
+		if (other->getData(i) != getData(i))
+			return false;
+	}
+
+	return true;
 }
 
 

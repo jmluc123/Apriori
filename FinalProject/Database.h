@@ -166,24 +166,75 @@ DDLinkedList<Candidate<T>*>* Database<T>::extract()
 	{
 		Candidate<T>* newC = new Candidate<T>;
 
-		for (int j = 0; j < 5; j++)
-		{
-			//add the single item to the set
-			newC->insert(j * 9);
-		}
-
+		//add the single item to the set
+		newC->insert(i);
 
 		L1->insert(newC);
 	}
-	writeList(L1, 0);
 
 	return L1;
 }
 
+
+/*
+Joins by checking every Candidate vs every other Candidate
+Prunes by counting subsets, < k subsets means it will be pruned
+*/
 template <typename T>
-DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>* ddlinkedlist)
+DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>* Lkp)
 {
-	return new DDLinkedList<Candidate<T>*>();
+	DDLinkedList<Candidate<T>*>* Ck = new DDLinkedList<Candidate<T>*>;
+	DDLinkedList<Candidate<T>*>* tmp = Ck;
+	int k;
+
+	//i = set, j = set to compare with
+	for (int i = 0; i < Lkp->getCount() - 1; i++)
+	{
+		Candidate<T>* toCopy1 = Lkp->getData(i);
+		DDLinkedList<Candidate<T>*>* copyTracker = new DDLinkedList<Candidate<T>*>;
+		k = toCopy1->getCount() + 1;
+
+		//fill tmp with p x q
+		for (int j = i + 1; j < Lkp->getCount(); i++)
+		{
+			Candidate<T>* toAdd = new Candidate<T>;
+			Candidate<T>* toCopy2 = Lkp->getData(j);
+			for (int g = 0; g < toCopy1->getCount(); g++)
+			{//fill candidates 
+				toAdd->insert(toCopy1->getData(g));
+				toAdd->insert(toCopy2->getData(g));
+			}
+
+			//only add if |tmp| = k and if nCp = k
+			if (toAdd->getCount() == k)
+			{
+				if (checkEquivalent(toAdd, tmp))
+					tmp->insert(toAdd);
+
+				//also add it to tracker
+				copyTracker->insert(toAdd);
+			}
+
+			//prune while joining
+
+			for (int j = 0; j < tmp->getCount(); j++)
+			{//for each member of tmp
+				int copyCount = 0;
+				Candidate<T>* toCheck = tmp->getData(j);
+				for (int g = 0; g < copyTracker->getCount(); g++)
+				{//count how many of each set are in copyTracker					
+					Candidate<T>* copyCheck = copyTracker->getData(g);
+
+					if (copyCheck->operator==(toCheck))
+						copyCount++;
+				}
+				//add if there are (k) copies
+				if (copyCount >= k)
+					Ck->insert(tmp->getData(j));
+			}
+		}
+	}
+	return Ck;
 }
 
 template <typename T>
@@ -212,28 +263,44 @@ DDLinkedList<Candidate<T>*>* Database<T>::prune(DDLinkedList<Candidate<T>*>* CK,
 	}
 	return CK;
 }
+//check if a candidate set is present in a set of sets
+template <typename T>
+bool checkEquivalent(Candidate<T>* s1, DDLinkedList<Candidate<T>*>* s2)
+{
+	for (int i = 0; i < s2->getCount(); i++)
+	{
+		if (s1->operator==(s2->getData(i)))
+			return false;
+	}
 
-//get the current itemset# in here somehow
+	return true;
+}
+
 template<typename T>
 void Database<T>::writeList(DDLinkedList<Candidate<T>*>* itemSet, double time)
 {
 	ofstream outFile;
-
+	Candidate<T>* candidate;
+	int cItemSet = 0;
 	outFile.open(mOutFileName.c_str(), ios::out | ios::app);
 
-	int cItemSet = -1;
+	if (itemSet->getCount() > 0)
+	{
+		candidate = itemSet->getData(0);
+		cItemSet = candidate->getCount();
+	}
+
 	outFile << cItemSet << "-itemsets: (" << itemSet->getCount() << " in total) ";
 
 	for (int i = 0; i < itemSet->getCount(); i++)
 	{
 		outFile << "{";
-		Candidate<T>* candidate = itemSet->getData(i);
+		candidate = itemSet->getData(i);
 		for (int j = 0; j < candidate->getCount(); j++)
 		{
 			if (j > 0 && j < candidate->getCount() - 1)
 				outFile << ",";
 			outFile << candidate->getData(j);
-
 		}
 		outFile << "} ";
 	}
