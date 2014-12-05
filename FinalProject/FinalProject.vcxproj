@@ -88,7 +88,9 @@
     <ClInclude Include="transaction.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bst-node.cpp" />
     <ClCompile Include="functions.cpp" />
+    <ClCompile Include="hash_table.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="timerSystem.cpp" />
   </ItemGroup>

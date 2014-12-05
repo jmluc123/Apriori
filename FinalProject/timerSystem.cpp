@@ -19,7 +19,8 @@
 *  Certification of Authenticity:
 *     I certify that this assignment is entirely my own work.
 **********************************************************************/
-
+#ifndef TIMERSYSTEM_CPP
+#define TIMERSYSTEM_CPP
 
 #include "header.h"
 
@@ -60,3 +61,4 @@ void TimerSystem::startClock()
 	QueryPerformanceCounter(&start);
 }
 
+#endif

@@ -241,9 +241,9 @@ template <typename T>
 DDLinkedList<Candidate<T>*>* Database<T>::subset(DDLinkedList<Candidate<T>*>* CK, int index)
 {
 	DDLinkedList<Candidate<T>*>* CT = new DDLinkedList<Candidate<T>*>();
-	BSTHashTable<T>* bsthashtable = new BSTHashTable(mAverageSize % 100);
+	BSTHashTable* bsthashtable = new BSTHashTable(mAverageSize % 100);
 	Transaction<T>* transaction = mDatabase[index];
-	for (int i = 0; i < CK->mCount(); i++)
+	for (int i = 0; i < CK->getCount(); i++)
 	{
 		bsthashtable->add(CK->getData(i));
 	}

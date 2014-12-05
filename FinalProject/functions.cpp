@@ -1,6 +1,3 @@
-#ifndef FUNCTIONS_CPP
-#define FUNCTIONS_CPP
-
 #include "header.h"
 
 void aDisplay(int *&structure, int count)
@@ -94,5 +91,3 @@ void reverseSort(int list[], int n)
 		list[n - i - 1] = tmp;
 	}
 }
-
-#endif
