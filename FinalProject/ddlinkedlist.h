@@ -286,7 +286,6 @@ bool DDLinkedList<T>::insert(T data)
 {
 	if (isExist(data)) return false;
 	Node<T>* node = new Node<T>(data);
-	Node<T>* prev; //node previous to tail
 	if (mCount == 0)
 	{
 		mHead = node;

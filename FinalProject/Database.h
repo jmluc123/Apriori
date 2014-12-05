@@ -24,7 +24,7 @@ public:
 	//void aprioriMain(DDLinkedList<Candidate<T>*>*); //pass in L[k-1] make this into a while loop
 	DDLinkedList<Candidate<T>*>* aprioriGen(DDLinkedList<Candidate<T>*>*); //Ryan
 	DDLinkedList<Candidate<T>*>* subset(DDLinkedList<Candidate<T>*>*, int);  //Josh
-	DDLinkedList<Candidate<T>*>* prune(DDLinkedList<Candidate<T>*>*); //Josh prune CK for next LK
+	DDLinkedList<Candidate<T>*>* prune(DDLinkedList<Candidate<T>*>* CK, int minsup); //Josh prune CK for next LK
 	void initializeOutput(); //writeList only appends, we need one to overwrite and add a header //Ryan | done
 };
 

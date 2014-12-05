@@ -31,10 +31,7 @@ struct BST_Node_Candidate
 };
 
 
-BST_Node_Candidate::~BST_Node_Candidate()
-{
 
-}
 
 void BST_Node_Candidate::add(Candidate<int>* candidate)
 {
@@ -62,6 +59,7 @@ void BST_Node_Candidate::add(Candidate<int>* candidate)
 bool BST_Node_Candidate::isExist(Candidate<int>* candidate)
 {
 	bool exists = false;
+	if (candidate->compare(mCandidate)) return true;
 	exists = mLeft->isExist(candidate);
 	if (exists) return true;
 	exists = mRight->isExist(candidate);
@@ -76,11 +74,17 @@ bool BST_Node_Candidate::isExist(Candidate<int>* candidate)
 BST_Node_Candidate::BST_Node_Candidate()
 {
 	//add your code
-	mCandidate* = new Candidate<int>();
+	mCandidate = new Candidate<int>();
 	mLeft = NULL;
 	mRight = NULL;
 }
 
+
+
+BST_Node_Candidate::~BST_Node_Candidate()
+{
+
+}
 
 /*        Pre: a BST is most likely initialized
 *     Post: a new node is initialized with a given value
@@ -98,18 +102,17 @@ BST_Node_Candidate::BST_Node_Candidate(Candidate<int>* candidate)
 *     Post: a new node is initialized for addition to a BST
 *  Purpose: initialize a new node with pre-attached nodes to a BST
 *****************************************************************/
-template <typename T>
 BST_Node_Candidate::BST_Node_Candidate(Candidate<int>* candidate, BST_Node_Candidate *left, BST_Node_Candidate *right)
 {
-	//add your code
 	mCandidate = candidate;
 	mLeft = left;
 	mRight = right;
 }
 
-void prune(Transaction<int>* transaction, DDLinkedList<Candidate<int>*>* CT, BST_Node_Candidate* node)
+void BST_Node_Candidate::prune(Transaction<int>* transaction, DDLinkedList<Candidate<int>*>* CT, BST_Node_Candidate* node)
 {
-	if (node->mCandidate->isIn(transaction)) CT->insert(node->mCandidate);
+	if (node == NULL) return;
+	if (transaction->contains(node->mCandidate)) CT->insert(node->mCandidate);
 	prune(transaction, CT, node->mLeft);
 	prune(transaction, CT, node->mRight);
 }
