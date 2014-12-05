@@ -6,7 +6,7 @@
 BST_Node_Candidate::BST_Node_Candidate()
 {
 	//add your code
-	mCandidate = new Candidate<int>();
+	mCandidate = NULL;
 	mLeft = NULL;
 	mRight = NULL;
 }
@@ -19,36 +19,43 @@ BST_Node_Candidate::~BST_Node_Candidate()
 }
 
 
-void BST_Node_Candidate::add(Candidate<int>* candidate)
+void BST_Node_Candidate::add(Candidate<int>* candidate, BST_Node_Candidate* node)
 {
+	if (node == NULL) return;
+	if (node->mCandidate == NULL) //root node with nothing in it.
+	{
+		mCandidate = candidate;
+		return;
+	}
 	if (candidate->getData(0) < mCandidate->getData(0))
 	{
 		if (mLeft)
-			mLeft->add(candidate);
+			add(candidate, mLeft);
 		else
 			mLeft = new BST_Node_Candidate(candidate);
 	}
 	else if (candidate->getData(0) >= mCandidate->getData(0))
 	{
-		if (candidate->compare(mCandidate))
+		if (candidate->compare(mCandidate)) //test if candidate is same as 
 		{
 			return;
 		}
 		if (mRight)
-			mRight->add(candidate);
+			add(candidate,mRight);
 		else
 			mRight = new BST_Node_Candidate(candidate);
 	}
 }
 
 
-bool BST_Node_Candidate::isExist(Candidate<int>* candidate)
+bool BST_Node_Candidate::isExist(Candidate<int>* candidate, BST_Node_Candidate* node)
 {
 	bool exists = false;
+	if (node == NULL) return false;
 	if (candidate->compare(mCandidate)) return true;
-	if (mLeft) exists = mLeft->isExist(candidate);
+	if (mLeft) exists = isExist(candidate, node->mLeft);
 	if (exists) return true;
-	if (mRight) exists = mRight->isExist(candidate);
+	if (mRight) exists = isExist(candidate, node->mRight);
 	if (exists) return true;
 	return false;
 

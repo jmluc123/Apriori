@@ -157,8 +157,9 @@ template <class T>
 T DDLinkedList<T>::getData(int index)
 {
 	if (index >= mCount){
-		cout << "Index out of range...\n";
+		cout << "GetData Index out of range...\n";
 		system("pause");
+		return T();
 	}
 	Node<T>* p;
 	p = mHead;
@@ -179,9 +180,8 @@ template <class T>
 bool DDLinkedList<T>::setData(int index, T data)
 {
 	if (index >= mCount || index < 0){
-		cout << "Index out of range...\n";
+		cout << "SetData Index out of range...\n";
 		system("pause");
-		system("cls");
 		return false;
 	}
 	Node<T>* p;

@@ -13,6 +13,7 @@ public:
 	Candidate();
 	~Candidate();
 	bool operator== (Candidate<T>*);
+	Candidate(T item);
 };
 
 template <typename T>
@@ -25,6 +26,13 @@ template <typename T>
 Candidate<T>::~Candidate()
 {
 
+}
+
+template <typename T>
+Candidate<T>::Candidate(T item)
+{
+	insert(item);
+	mRepeatCount = 0;
 }
 
 //check if sets are equal to eachother - rather than their addresses 

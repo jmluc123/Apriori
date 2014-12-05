@@ -9,6 +9,7 @@ class Transaction
 private:
 	T* mItems; //item list
 	int mCount; //number of items
+	int mSize;  //size of mItems
 	int mID;  //transaction id
 
 public:
@@ -21,6 +22,7 @@ public:
 	void setID(int id);
 	bool contains(Candidate<T>* candidate);
 	int getID();
+	void appendItem(T item);
 };
 
 /*
@@ -30,6 +32,13 @@ Transaction<T>::Transaction()
 
 }
 */
+template <typename T>
+void Transaction<T>::appendItem(T item)
+{
+	mItems[mCount] = item;
+	mCount++;
+}
+
 template <typename T>
 int Transaction<T>::getID()
 {
@@ -49,11 +58,12 @@ void Transaction<T>::setID(int id)
 }
 
 template <typename T>
-Transaction<T>::Transaction(int id, int count)
+Transaction<T>::Transaction(int id, int size)
 {
 	mID = id;
-	mItems = new int[count];
-	mCount = count;
+	mItems = new int[size];
+	mSize = size;
+	mCount = 0;
 }
 
 template <typename T>

@@ -7,13 +7,14 @@ template <typename T>
 class Database
 {
 	Transaction<T>** mDatabase; //array of transaction pointers
+	int mSize;
 	int mTransactionCount; //number of transactions D
 	int mAverageSize;  //average size of transactions T
 	int mNumberOfItems; //N
 	float mMinSupp; //S
 	string mOutFileName;
 public:
-	Database(int count, int average, int numItems, float minSupp);  //Josh | done
+	Database(int size, int average, int numItems, float minSupp);  //Josh | done
 	Transaction<T>* getIndex(int index);  //
 	void appendTransaction(Transaction<T>* transaction); //add a transaction to the end //Ryan
 	void load(); //load file into mDatabase  //Josh
@@ -29,15 +30,16 @@ public:
 };
 
 template <typename T>
-Database<T>::Database(int count, int average, int numItems, float minSupp)
+Database<T>::Database(int size, int average, int numItems, float minSupp)
 {
-	mDatabase = new Transaction<T>*[count];
-	mTransactionCount = count;
+	mDatabase = new Transaction<T>*[size];
+	mSize = size;
+	mTransactionCount = 0;
 	mAverageSize = average;
 	mNumberOfItems = numItems;
 	mMinSupp = minSupp;
 
-	mOutFileName = toString(average) + "_" + toString(count) + "_" + toString(numItems)
+	mOutFileName = toString(average) + "_" + toString(mTransactionCount) + "_" + toString(numItems)
 		+ "_" + toString(minSupp) + "_Output.txt";
 
 	initializeOutput();
@@ -58,12 +60,8 @@ Transaction<T>* Database<T>::getIndex(int index)
 template <typename T>
 void Database<T>::appendTransaction(Transaction<T>* transaction)
 {
-	Transaction<T>** newDatabase = new Transaction<T>[++mTransactionCount];
-	int i;
-	for (i = 0; i < mTransactionCount - 1; i++)
-		newDatabase[i] = mDatabase;
-	newDatabase[i] = transaction;
-	mDatabase = newDatabase;
+	mDatabase[mTransactionCount] = transaction;
+	mTransactionCount++;
 }
 
 template <typename T>
@@ -84,12 +82,12 @@ void Database<T>::load()
 			{
 				count++;
 			}
-			Transaction<T>* transaction = new Transaction<T>(itemArray[0],count);
-			for (int iterate = 1; iterate <= count; iterate++)
+			Transaction<T>* transaction = new Transaction<T>(itemArray[0],count - 1);
+			for (int iterate = 1; iterate < count; iterate++)
 			{
-				transaction->setItem(iterate - 1, itemArray[iterate]);
+				transaction->appendItem(itemArray[iterate]);
 			}
-			mDatabase[i] = transaction;
+			appendTransaction(transaction);
 			delete[] itemArray;
 			i++;
 		}
@@ -140,7 +138,6 @@ void Database<T>::apriori(int minsup)
 		k++;
 	}
 	delete LK_1;
-	delete CT;
 	delete CK;
 }
 
@@ -165,17 +162,41 @@ void Database<T>::initializeOutput()
 template<typename T>
 DDLinkedList<Candidate<T>*>* Database<T>::extract()
 {
-	DDLinkedList<Candidate<T>*>* L1 = new DDLinkedList<Candidate<T>*>;
-
+	DDLinkedList<Candidate<T>*>* L1 = new DDLinkedList<Candidate<T>*>();
+	int itemCount = 0;
+	T item;
+	bool found;
 	//fill L1 with Candidates, one for each item - N
-	for (int i = 0; i < mNumberOfItems; i++)
+	for (int i = 0; i < mTransactionCount; i++) //for each transaction
 	{
-		Candidate<T>* newC = new Candidate<T>;
-
-		//add the single item to the set
-		newC->insert(i);
-
-		L1->insert(newC);
+		Transaction<T>* transaction = mDatabase[i];
+		for (int j = 0; j < transaction->getCount(); j++) //for each item in transaction
+		{
+			item = transaction->getItem(j);
+			Candidate<T>* candidate;
+			if (L1->getCount() == 0) //test for a candidate item
+			{
+				candidate = new Candidate<T>(item); //add first item
+				L1->insert(candidate);
+			} 
+			else //for all other items
+			{
+				found = false;
+				for (int x = 0; x < L1->getCount(); x++) // test if item is in L1 candidates already
+				{
+					if (item == L1->getData(x)->getData(0)) //test if 0 index of candidate is equal to item.  If the item is not found in L1 found remains false
+					{
+						found = true;
+						break;
+					}
+				}
+				if (found == false) //if the item was not found in L1, add to L1
+				{
+					candidate = new Candidate<T>(item);
+					L1->insert(candidate);
+				}
+			}
+		}
 	}
 
 	return L1;

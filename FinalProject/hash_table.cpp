@@ -4,6 +4,10 @@ BSTHashTable::BSTHashTable(int listSize)
 {
 	mSize = listSize;
 	bucket = new BST_Node_Candidate*[mSize];
+	for (int i = 0; i < mSize; i++)
+	{
+		bucket[i] = new BST_Node_Candidate();
+	}
 }
 
 
@@ -16,7 +20,7 @@ BSTHashTable::~BSTHashTable()
 void BSTHashTable::add(Candidate<int>* candidate)
 {
 	int index = hash(candidate);
-	bucket[index]->add(candidate);
+	bucket[index]->add(candidate, bucket[index]);
 }
 
 
@@ -29,7 +33,7 @@ bool BSTHashTable::contains(Candidate<int>* candidate)
 	}
 	else
 	{
-		return bucket[index]->isExist(candidate);
+		return bucket[index]->isExist(candidate, bucket[index]);
 	}
 }
 

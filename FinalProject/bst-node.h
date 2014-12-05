@@ -25,8 +25,8 @@ public:
 	BST_Node_Candidate();
 	BST_Node_Candidate(Candidate<int>* candidate);
 	BST_Node_Candidate(Candidate<int>* candidate, BST_Node_Candidate *left, BST_Node_Candidate *right);
-	void add(Candidate<int>* candidate);
-	bool isExist(Candidate<int>* candidate);
+	void add(Candidate<int>* candidate, BST_Node_Candidate* node);
+	bool isExist(Candidate<int>* candidate, BST_Node_Candidate* node);
 	~BST_Node_Candidate();
 	void prune(Transaction<int>*, DDLinkedList<Candidate<int>*>*, BST_Node_Candidate*);
 };
