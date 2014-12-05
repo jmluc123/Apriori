@@ -78,6 +78,7 @@ void Database<T>::apriori(int minsup)
 	Candidate<T>* candidate;
 	Candidate<T>* ctCandidate;
 	double time;
+	double compiledTime = 0;
 	TimerSystem timer;
 	int k = 2;
 	while (!LK_1->isEmpty())
@@ -102,6 +103,7 @@ void Database<T>::apriori(int minsup)
 		LK_1 = prune(CK, minsup); //prune all lists from CK that don't have the required mRepeatCount
 		time = timer.getTime();
 		writeList(LK_1, time);
+		compiledTime = compiledTime + time;
 		delete CK;
 		k++;
 	}
@@ -135,9 +137,16 @@ DDLinkedList<Candidate<T>*>* Database<T>::subset(DDLinkedList<Candidate<T>*>* CK
 }
 
 template <typename T>
-DDLinkedList<Candidate<T>*>* Database<T>::prune(DDLinkedList<Candidate<T>*>* ddlinkedlist)
+DDLinkedList<Candidate<T>*>* Database<T>::prune(DDLinkedList<Candidate<T>*>* CK, int minsup)
 {
-	return new DDLinkedList<Candidate<T>*>();
+	for (int i = 0; i < CK->getCount(); i++)
+	{
+		if (CK->getData(i)->mRepeatCount < minsup)
+		{
+			CK->removeAt(i);
+		}
+	}
+	return CK;
 }
 
 template <typename T>

@@ -1,4 +1,4 @@
-﻿Build started 12/4/2014 9:58:04 PM.
+﻿Build started 12/4/2014 10:10:24 PM.
      1>Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt functions.cpp main.cpp timerSystem.cpp
@@ -16,7 +16,12 @@
                  'BST_Node_Candidate::BST_Node_Candidate(void)'
      1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(112): error C2664: 'bool Candidate<int>::isIn(Transaction *)' : cannot convert argument 1 from 'Transaction<int> *' to 'Transaction *'
                  Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\hash_table.h(58): error C2039: 'contains' : is not a member of 'BSTHashTable<T>'
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(150): error C2244: 'Database<T>::prune' : unable to match function definition to an existing declaration
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(24) : see declaration of 'Database<T>::prune'
+                 definition
+                 'DDLinkedList<Candidate<T>*> *Database<T>::prune(DDLinkedList<Candidate<T>*> *,int)'
+                 existing declarations
+                 'DDLinkedList<Candidate<T>*> *Database<T>::prune(DDLinkedList<Candidate<T>*> *)'
          main.cpp
      1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(23): error C2061: syntax error : identifier 'Candidate'
                  c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(24) : see reference to class template instantiation 'Transaction<T>' being compiled
@@ -31,7 +36,12 @@
                  'BST_Node_Candidate::BST_Node_Candidate(void)'
      1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(112): error C2664: 'bool Candidate<int>::isIn(Transaction *)' : cannot convert argument 1 from 'Transaction<int> *' to 'Transaction *'
                  Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\hash_table.h(58): error C2039: 'contains' : is not a member of 'BSTHashTable<T>'
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(150): error C2244: 'Database<T>::prune' : unable to match function definition to an existing declaration
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(24) : see declaration of 'Database<T>::prune'
+                 definition
+                 'DDLinkedList<Candidate<T>*> *Database<T>::prune(DDLinkedList<Candidate<T>*> *,int)'
+                 existing declarations
+                 'DDLinkedList<Candidate<T>*> *Database<T>::prune(DDLinkedList<Candidate<T>*> *)'
          functions.cpp
      1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(23): error C2061: syntax error : identifier 'Candidate'
                  c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\transaction.h(24) : see reference to class template instantiation 'Transaction<T>' being compiled
@@ -46,10 +56,15 @@
                  'BST_Node_Candidate::BST_Node_Candidate(void)'
      1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\bst-node.h(112): error C2664: 'bool Candidate<int>::isIn(Transaction *)' : cannot convert argument 1 from 'Transaction<int> *' to 'Transaction *'
                  Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\hash_table.h(58): error C2039: 'contains' : is not a member of 'BSTHashTable<T>'
+     1>c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(150): error C2244: 'Database<T>::prune' : unable to match function definition to an existing declaration
+                 c:\users\jmluc_000\documents\visual studio 2013\projects\apriori\finalproject\database.h(24) : see declaration of 'Database<T>::prune'
+                 definition
+                 'DDLinkedList<Candidate<T>*> *Database<T>::prune(DDLinkedList<Candidate<T>*> *,int)'
+                 existing declarations
+                 'DDLinkedList<Candidate<T>*> *Database<T>::prune(DDLinkedList<Candidate<T>*> *)'
          Generating Code...
      1>Done Building Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:02.14
+Time Elapsed 00:00:02.00

@@ -12,6 +12,7 @@ public:
 	~BSTHashTable();
 	void add(Candidate<T>* candidate);
 	void prune(Transaction<T>* transaction, DDLinkedList<Candidate<int>*>* CT);
+	bool contains(Candidate<T>* candidate);
 };
 
 template <typename T>
