@@ -2,6 +2,10 @@
 *.suo
 *.sdf
 *.opensdf
+*.ilk
+*.pdb
+*.tlog
+*.idb
 
 # Compiled Object files
 *.slo
