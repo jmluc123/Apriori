@@ -1,11 +1,11 @@
 /* ***
 *    co-Author:  Joshua Lucier
-*  Last Update:  October 31, 2014
+*  Last Update:  December 5, 2014
 *        Class:  CSI-281
 *     Filename:  bst-node.h
 *
 *  Description:
-*      A node for the BST object.
+*      A node for the BST tree for the hash table object.
 *
 *  Certification of Authenticity:
 *     I certify that this assignment is entirely my own work.

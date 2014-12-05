@@ -1,3 +1,15 @@
+/* ***
+*      Changed:  Joshua Lucier & Ryan Moss
+*  Last Update:  December 5, 2014
+*        Class:  CSI-281
+*     Filename:  ddlinkedList.h
+*
+*  Description:
+*      This is the Candidate item which is a basic association rule.
+*
+*  Certification of Authenticity:
+*     I certify that changes to this assignment are entirely my own work.
+**********************************************************************/
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 /* Ryan */
@@ -32,31 +44,61 @@ Transaction<T>::Transaction()
 
 }
 */
+/*
+*	Pre: A transaction is initialized
+*	Post: Add an item to the transaction
+*	Purpose: Add an item to the transaction
+*/
 template <typename T>
 void Transaction<T>::appendItem(T item)
 {
+	if (mCount >= mSize)
+	{
+		cout << "Too may items for this transaction...";
+		return;
+	}
 	mItems[mCount] = item;
 	mCount++;
 }
 
+/*
+*	Pre:  A transaction has been initialized and setID has been called
+*	Post: return the id of the transaction
+*	Purpose: get id of transaction
+*/
 template <typename T>
 int Transaction<T>::getID()
 {
 	return mID;
 }
 
+/*
+*	Pre: A transaction has been initialized
+*	Post: returns number of items in transaction
+*	Purpose: get how many items are actually in transaction
+*/
 template <typename T>
 int Transaction<T>::getCount()
 {
 	return mCount;
 }
 
+/*
+*	Pre:  Transaction is initialized
+*	Post:  set the transaction id for the transaction object
+*	Purpose: Set the transaction id to what is in the database
+*/
 template <typename T>
 void Transaction<T>::setID(int id)
 {
 	mID = id;
 }
 
+/*
+*	Pre:  Constructor for transaction object
+*	Post:  transaction is initialized with id and maximum size
+*	Purpose: Initialize the transaction object
+*/
 template <typename T>
 Transaction<T>::Transaction(int id, int size)
 {
@@ -66,6 +108,11 @@ Transaction<T>::Transaction(int id, int size)
 	mCount = 0;
 }
 
+/*
+*	Pre:  set an item in the transaction
+*	Post: item is set
+*	Purpose: set an item
+*/
 template <typename T>
 void Transaction<T>::setItem(int index, T item)
 {
@@ -77,6 +124,11 @@ void Transaction<T>::setItem(int index, T item)
 	mItems[index] = item;
 }
 
+/*
+*	Pre: transaction is initialized
+*	Post: return an item
+*	Purpose: return an item from the transaction
+*/
 template <typename T>
 T Transaction<T>::getItem(int index)
 {
@@ -88,6 +140,11 @@ T Transaction<T>::getItem(int index)
 	return mItems[index];
 }
 
+/*
+*	Pre: 
+*	Post:
+*	Purpose:  Experimental
+*/
 template <typename T>
 bool Transaction<T>::contains(Candidate<T>* candidate)
 {

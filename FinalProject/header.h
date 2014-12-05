@@ -1,3 +1,16 @@
+/* ***
+*      Changed:  Joshua Lucier & Ryan Moss
+*  Last Update:  December 5, 2014
+*        Class:  CSI-281
+*     Filename:  header.h
+*
+*  Description:
+*      header file for all includes
+*
+*  Certification of Authenticity:
+*     I certify that changes to this assignment are entirely my own work.
+**********************************************************************/
+
 #ifndef HEADER_H
 #define HEADER_H
 
@@ -20,7 +33,7 @@ using namespace std;
 #include "database.h"
 
 
-
+//Various useful functions
 int aInsert(int *&structure, int data, int index, int capacity, int count);
 int* aDelete(int *&structure, int index, int capacity, int count);
 bool isExist(int *&structure, int data, int capacity);

@@ -1,12 +1,11 @@
 /* ***
-*       Author:  Li Jun ZHANG
 *      Changed:  Joshua Lucier
-*  Last Update:  Sept 12, 2014
+*  Last Update:  December 5, 2014
 *        Class:  CSI-281
-*     Filename:  linkedList.h
+*     Filename:  ddlinkedList.h
 *
 *  Description:
-*      This is the template linked list definition.
+*      This is the template doubly linked list definition.
 *
 *  Certification of Authenticity:
 *     I certify that changes to this assignment are entirely my own work.

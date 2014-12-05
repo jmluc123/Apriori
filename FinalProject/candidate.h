@@ -1,3 +1,16 @@
+/* ***
+*      Changed:  Joshua Lucier & Ryan Moss
+*  Last Update:  December 5, 2014
+*        Class:  CSI-281
+*     Filename:  candidate.h
+*
+*  Description:
+*      This is the Candidate item which is a basic association rule.  
+*
+*  Certification of Authenticity:
+*     I certify that changes to this assignment are entirely my own work.
+**********************************************************************/
+
 #ifndef CANDIDATE_H
 #define CANDIDATE_H
 /* Ryan */
@@ -56,16 +69,16 @@ template <typename T>
 bool Candidate<T>::compare(Candidate<T>* candidate)
 {
 	bool forwardCompare;
-	bool forwardCompareAll = false;
-	bool compareAll = true;
-	for (int i = 0; i < getCount(); i++)
+	bool forwardCompareAll = true;
+	bool compareAll = false;
+	for (int i = 0; i < getCount(); i++) // for each in home candidate
 	{
 		forwardCompare = false;
-		for (int c = 0; c < candidate->getCount(); c++)
+		for (int c = 0; c < candidate->getCount(); c++) //for each in guest candidate
 		{
-			if (getData(i) == candidate->getData(c))
+			if (getData(i) == candidate->getData(c)) //compare home candidate with guest candidate
 			{
-				forwardCompare = true;
+				forwardCompare = true;//if home candidate is in guest candidate set true and search next home candidate
 				break;
 			}
 		}
@@ -75,15 +88,16 @@ bool Candidate<T>::compare(Candidate<T>* candidate)
 			break;
 		}
 	}
-	if (forwardCompareAll)
+	if (forwardCompareAll)  //All items in home candidate are in guest candidate but is guest candidate a subset of the home candidate as well?
 	{
+		compareAll = true;
 		bool backwardCompare;
-		for (int i = 0; i < candidate->getCount(); i++)
+		for (int c = 0; c < candidate->getCount(); c++) //for all in guest candidate
 		{
 			backwardCompare = false;
-			for (int c = 0; c < getCount(); c++)
+			for (int k = 0; k < getCount(); k++) //for all in home candidate
 			{
-				if (getData(c) == candidate->getData(i))
+				if (getData(k) == candidate->getData(c)) //compare home candidate to guest candidate
 				{
 					backwardCompare = true;
 					break;
@@ -96,7 +110,7 @@ bool Candidate<T>::compare(Candidate<T>* candidate)
 			}
 		}
 	}
-	return compareAll;
+	return compareAll;  //false if candidate was not found
 }
 
 #endif

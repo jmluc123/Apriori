@@ -1,4 +1,18 @@
+/* ***
+*      Changed:  Joshua Lucier & Ryan Moss
+*  Last Update:  December 5, 2014
+*        Class:  CSI-281
+*     Filename:  header.h
+*
+*  Description:
+*      bst_node_candidate functions
+*
+*  Certification of Authenticity:
+*     I certify that changes to this assignment are entirely my own work.
+**********************************************************************/
+
 #include "header.h"
+
 /*        Pre:  A BST is most likely initialized
 *     Post: a new node is initialized
 *  Purpose: create a new node for a BST
@@ -24,27 +38,28 @@ void BST_Node_Candidate::add(Candidate<int>* candidate, BST_Node_Candidate* node
 	if (node == NULL) return;
 	if (node->mCandidate == NULL) //root node with nothing in it.
 	{
-		mCandidate = candidate;
+		node->mCandidate = candidate;
 		return;
 	}
-	if (candidate->getData(0) < mCandidate->getData(0))
+	if (candidate->getData(0) < node->mCandidate->getData(0))
 	{
-		if (mLeft)
-			add(candidate, mLeft);
+		if (node->mLeft)
+			add(candidate, node->mLeft);
 		else
-			mLeft = new BST_Node_Candidate(candidate);
+			node->mLeft = new BST_Node_Candidate(candidate);
 	}
-	else if (candidate->getData(0) >= mCandidate->getData(0))
+	else if (candidate->getData(0) >= node->mCandidate->getData(0))
 	{
-		if (candidate->compare(mCandidate)) //test if candidate is same as 
+		if (candidate->compare(node->mCandidate)) //test if candidate is same as 
 		{
 			return;
 		}
-		if (mRight)
-			add(candidate,mRight);
+		if (node->mRight)
+			add(candidate,node->mRight);
 		else
-			mRight = new BST_Node_Candidate(candidate);
+			node->mRight = new BST_Node_Candidate(candidate);
 	}
+	return;
 }
 
 
