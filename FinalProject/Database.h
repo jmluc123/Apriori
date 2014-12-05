@@ -259,7 +259,6 @@ DDLinkedList<Candidate<T>*>* Database<T>::extract()
 	return L1;
 }
 
-
 /*
 *	Pre:  Apriori has been called.  While loop is initiated.  L[k-1] is passed
 *	Post: returns C[k] by joining sets
