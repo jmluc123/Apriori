@@ -136,6 +136,8 @@ void Database<T>::apriori(int minsup)
 		k++;
 	}
 	delete LK_1;
+	delete CT;
+	delete CK;
 }
 
 template<typename T>

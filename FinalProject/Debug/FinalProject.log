@@ -1,4 +1,4 @@
-﻿Build started 12/5/2014 1:29:40 AM.
+﻿Build started 12/5/2014 1:32:35 AM.
      1>Project "C:\Users\jmluc_000\Documents\Visual Studio 2013\Projects\Apriori\FinalProject\FinalProject.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "bst-node.cpp" functions.cpp hash_table.cpp main.cpp timerSystem.cpp
@@ -22,4 +22,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.25
+Time Elapsed 00:00:04.32
