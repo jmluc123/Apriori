@@ -36,12 +36,6 @@ Candidate<T>::Candidate()
 }
 
 template <typename T>
-Candidate<T>::~Candidate()
-{
-
-}
-
-template <typename T>
 Candidate<T>::Candidate(T item)
 {
 	insert(item);
@@ -52,8 +46,6 @@ Candidate<T>::Candidate(T item)
 template <typename T>
 bool Candidate<T>::operator== (Candidate<T>* other)
 {
-	if (this == NULL && other == NULL) return true;
-	else if (this == NULL || other == NULL) return false;
 	for (int i = 0; i < other->getCount(); i++)
 	{
 		if (other->getData(i) != getData(i))

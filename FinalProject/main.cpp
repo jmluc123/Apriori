@@ -16,10 +16,22 @@
 
 void main()
 {
+	/*
+	DDLinkedList<int>* ddlinkedlist = new DDLinkedList<int>;
+	for (int i = 0; i < 10; i++)
+	{
+		ddlinkedlist->insert(i);
+	}
+	ddlinkedlist->display();
+	ddlinkedlist->removeAt(5);
+	ddlinkedlist->display();
+	system("pause");
+	delete ddlinkedlist;
+	*/
 	//database with 1000 transactions, an average of 4 items per transaction with 1000 distinct items at a confidence of .05
 	Database<int>* database = new Database<int>(1000, 4, 1000, 0.05); 
 	database->load();
 	database->apriori(13);
+	system("pause");
 	delete database;
-	
 }

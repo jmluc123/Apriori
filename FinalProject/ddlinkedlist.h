@@ -19,478 +19,279 @@
 template <typename T>
 class DDLinkedList
 {
-	template <typename T>
-	struct Node
-	{
-		T       mData;
-		Node<T> *mNext;
-		Node<T> *mPrev;
-
-		/*      Pre:  None
-		*     Post:  This object is initialized using default values
-		*  Purpose:  To initialize date object
-		*************************************************************************/
-		Node()
-		{
-			mData = T();
-			mNext = NULL;
-			mPrev = NULL;
-		}
-
-
-		/*      Pre:  None
-		*     Post:  This object is initialized using specified data
-		*  Purpose:  To intialize date object
-		*************************************************************************/
-		Node(T data)
-		{
-			mData = data;
-			mNext = NULL;
-			mPrev = NULL;
-		}
-	};
-
-
 private:
-	Node<T> *mHead, *mTail;
-	int     mCount;
+	T* mLinkedList;
+	int mCount;
 
 public:
-	static int seed[3];
+	DDLinkedList(int);
 	DDLinkedList();
 	~DDLinkedList();
-	DDLinkedList(DDLinkedList<T>&);
-	int  getCount();
+	int getCount();
+	int getCapactity();
 	T getData(int index);
 	bool setData(int index, T data);
 
 	void clear();
 	void display();
-	bool insert(T data);
-	bool insert(T data, int index);
+	bool insert(T);
+	bool insert(T, int);
 	bool isEmpty();
 	bool isExist(T searchKey);
 	bool remove(T searchKey);
-	T    removeAt(int index);
-
-	T operator[](int index);
+	bool removeAt(int);
+	int insert(int *&structure, int data, int index, int capacity, int count);
 };
 
-/*      Pre:  The list is instantiated and the index is valid
-*     Post:  The data in the specified index is returned to the caller
-*  Purpose:  To retrieve the specified nodes in the list using [] operator
-*****************************************************************************/
-template <class T>
-T DDLinkedList<T>::operator[](int index)
-{
-	return getData(index);
-}
-
 /*      Pre:  None
-*     Post:  This object is initialized using the default
-*  Purpose:  To initialize date object
-*****************************************************************************/
+*     Post:  This object is initialized using default values
+*  Purpose:  To initialize static linked list
+*************************************************************************/
 template <class T>
 DDLinkedList<T>::DDLinkedList()
 {
-	mHead = NULL;
-	mTail = NULL;
+	mLinkedList = NULL;
 	mCount = 0;
 }
 
-/*      Pre:  List is instantiated during a copy
-*     Post:  This object is initialized with data from the original list
-*  Purpose:  Copy Constructor
-*****************************************************************************/
-template <class T>
-DDLinkedList<T>::DDLinkedList(DDLinkedList<T>& list)
-{
-	mCount = 0;
-	if (list.mCount == 0)
-	{
-		mHead = NULL;
-		mTail = NULL;
-		mCount = 0;
-	}
-	//test for head and tail
-	if (list.mCount == 1)
-	{
-		insert(list[0]);
-	}
-	else
-	{
-		for (int i = 0; i < list.mCount; i++)
-		{
-			insert(list[i]);
-		}
-	}
-}
-
-/*      Pre:  None
-*     Post:  All the nodes in the list is deleted
-*  Purpose:  To remove all the nodes in the list
-*****************************************************************************/
+/*      Pre:  Static linked list is initialized
+*     Post:  deletes static linked list array
+*  Purpose:  clean up before static linked list is deleted
+*************************************************************************/
 template <class T>
 DDLinkedList<T>::~DDLinkedList()
 {
-	clear();
+	if (mLinkedList) delete[] mLinkedList;
+	mLinkedList = NULL;
 }
 
-
-/*      Pre:  The object is instantiated
-*     Post:  The number of nodes in the linked list is returned to the caller
-*  Purpose:  To retrieve the number of nodes in the list
-*****************************************************************************/
+/*      Pre:  Static linked list is initialized
+*     Post:  Returns the count of indexes in the data portion of the array
+*  Purpose:  get the amount of data values in the array.
+*************************************************************************/
 template <class T>
 int DDLinkedList<T>::getCount()
 {
 	return mCount;
 }
 
-
-/*      Pre:  The list is instantiated and the index is valid
-*     Post:  The data in the specified index is returned to the caller
-*  Purpose:  To retrieve the specified nodes in the list
-*****************************************************************************/
+/*      Pre:  linked list is initialized
+*     Post:  Gets the value of a specific virtual index in the linked list
+*  Purpose:  Get a value from the linked list
+*************************************************************************/
 template <class T>
 T DDLinkedList<T>::getData(int index)
 {
-	if (index >= mCount){
-		cout << "GetData Index out of range...\n";
-		system("pause");
+	if (index < 0 || index >= mCount)
+	{
+		cout << "Index out of range";
 		return T();
 	}
-	Node<T>* p;
-	p = mHead;
-	for (int i = 0; i < index; i++)
-	{
-		p = p->mNext;
-	}
-	return p->mData;
+	return mLinkedList[index];
 }
 
-/*      Pre:  The list is instantiated, the index is valid and the data is
-*            available
-*     Post:  The data in the specified index is updated with the specified
-*            data
-*  Purpose:  To update the specified nodes in the list
-*****************************************************************************/
+/*      Pre:  static linked list is initialized
+*     Post:  Sets a value in the linked list
+*  Purpose:  Sets a value in the linked list based on its virtual index
+*************************************************************************
 template <class T>
 bool DDLinkedList<T>::setData(int index, T data)
 {
-	if (index >= mCount || index < 0){
-		cout << "SetData Index out of range...\n";
-		system("pause");
+	if (index > mCapacity - 1)
+	{
+		cout << "Index out of range";
 		return false;
 	}
-	Node<T>* p;
-	p = mHead;
-	for (int i = 0; i < index; i++)
-	{
-		p = p->mNext;
-	}
-	p->mData = data;
+	int trueindex;
+	if (mFront + index >= mCapacity) trueindex = mfront + index - mCapacity;
+	else trueindex = mfront + index;
+	mLinkedList[trueindex] = data;
 	return true;
 }
+*/
 
-/*      Pre:  The list is initiated
-*     Post:  All the nodes in the list is deleted
-*  Purpose:  To remove all the nodes in the list
-*****************************************************************************/
+/*      Pre:  Static linked list
+*     Post:  Destroys the linked list values and gets ready for more
+*  Purpose:  Make a new linked list
+*************************************************************************/
 template <class T>
 void DDLinkedList<T>::clear()
 {
-	Node<T>* p; //position
-	Node<T>* d; //node to delete
-	if (mHead == NULL) return;
-	p = mHead;
-	mHead = NULL;
-	mTail = NULL;
-	for (int i = 0; i < mCount - 2; i++)
-	{
-		d = p;
-		p = p->mNext;
-		delete d;
-	}
-	delete p;
+	delete[] mLinkedList;
+	mLinkedList = NULL;
 	mCount = 0;
 }
 
-
-
-/*      Pre:  The list is instantiated
-*     Post:  The entire list is displayed on the screen
-*  Purpose:  To show the content of the list
-*****************************************************************************/
+/*      Pre:  static linked list is initialized
+*     Post:  display values of linked list
+*  Purpose:  display the contents of linked list
+*************************************************************************/
 template <class T>
 void DDLinkedList<T>::display()
 {
-	if (mCount == 0)
+	for (int i = 0; i < mCount; i++)
 	{
-		cout << "No items in set..." << "\n";
-		return;
+		cout << mLinkedList[i] << " ";
 	}
-	Node<T>* p; //position to display
-	p = mHead;
-	ostringstream mStream;
-	cout << "{ ";
-	mStream << p->mData;
-	cout << mStream.str();
-	if (mCount > 1)
-	{
-		mStream.str("");
-		p = p->mNext;
-		for (int i = 1; i < mCount - 1; i++)
-		{
-			mStream << p->mData;
-			cout << ", " << mStream.str();
-			mStream.str("");
-			p = p->mNext;
-		}
-		mStream << p->mData;
-		cout << ", " << mStream.str();
-		mStream.str("");
-	}
-	cout << " }" << "\n";
+	cout << endl;
 }
 
-/*      Pre:  The list is instantiated and the searchKey is available
-*     Post:  The function returns true if the search key exists in the list;
-*            otherwise false
-*  Purpose:  To determine if a specific value exists in the list or not
-*****************************************************************************/
-template <class T>
-bool DDLinkedList<T>::isExist(T searchKey)
-{
-	Node<T>* p; //position
-	p = mHead;
-	bool found = false;
-	if (mCount == 0) return found;
-	if (p->mData == searchKey) found = true;
-	for (int i = 1; i < mCount && found == false; i++)
-	{
-		p = p->mNext;
-		if (p->mData == searchKey) found = true;
-	}
-	return found;
-}
-
-/*      Pre:  The list is instantiated and the data is available
-*     Post:  The data is inserted in ascending order
-*  Purpose:  To insert a data into the list in ascending order.  However, if
-*            the data already existed in the list, it will not be added again
-*****************************************************************************/
+/*      Pre:  static linked list is initialized
+*     Post:  insert data to the end of a static linked list
+*  Purpose:  add data to a linked list
+*************************************************************************/
 template <class T>
 bool DDLinkedList<T>::insert(T data)
 {
-	if (isExist(data)) return false;
-	Node<T>* node = new Node<T>(data);
 	if (mCount == 0)
 	{
-		mHead = node;
-		mTail = node;
-		node->mNext = NULL;
-		node->mPrev = NULL;
+		mLinkedList = new T[1];
+		mLinkedList[0] = data;
 		mCount++;
 		return true;
 	}
 	else
 	{
-		mTail->mNext = node;
-		node->mPrev = mTail;
-		mTail = node;
-		mCount++; //increment
+		T* mLinkedListTmp = new T[mCount + 1];
+		for (int i = 0; i < mCount; i++)
+		{
+			mLinkedListTmp[i] = mLinkedList[i];
+		}
+		mLinkedListTmp[mCount] = data;
+		delete mLinkedList;
+		mLinkedList = mLinkedListTmp;
+		mCount++;
+		return true;
 	}
-	return true;
+	return false;
 }
 
+/*      Pre:  Static linked list is initialized
+*     Post:  adds a specific piece of data at a specific virtual index.
+*  Purpose:  add data to a static linked list
+*************************************************************************
+template <class T>
+bool DDLinkedList<T>::insert(T data, int index)
+{
+	if (mCount == 0)
+	{
+		mLinkedList[mFront] = data;
+		mRear = mFront;
+		mCount++;
+		return true;
+	}
+	if (index >= mCount)
+	{
+		cout << "Index out of range";
+		return false;
+	}
+	int trueIndex = mFront + index;
+	if (mFront + index >= mCapacity) trueIndex = trueIndex - mCapacity;
+	if (mCount == mCapacity)
+	{
+		return false;
+	}
+	int i = mRear;
+	int stillIndex = trueIndex - 1;
+	if (stillIndex == -1) stillIndex = mCapacity - 1;
+	while (i != stillIndex)
+	{
+		mLinkedList[i + 1] = mLinkedList[i];
+		i--;
+		if (i == -1) i = mCapacity - 1;
+	}
+	mLinkedList[trueIndex] = data;
+	mRear = mRear + 1;
+	if (mRear == mCapacity) mRear = 0;
+	mCount++;
+	return true;
+}
+*/
 
-/*      Pre:  The list is instantiated
-*     Post:  The function returns true is the list is empty; false otherwise
-*  Purpose:  To determine if the list is empty
-*****************************************************************************/
+/*      Pre:  static linked list is initialized
+*     Post:  returns true if the linked list is empty
+*  Purpose:  find out if a linked list is empty
+*************************************************************************/
 template <class T>
 bool DDLinkedList<T>::isEmpty()
 {
 	if (mCount == 0) return true;
+	else return false;
+}
+
+/*      Pre:  static linked list is initialized
+*     Post:  returns true if the data value is found in the linked list
+*  Purpose:  test if a value exists
+*************************************************************************/
+template <class T>
+bool DDLinkedList<T>::isExist(T searchKey)
+{
+	for (int i = 0; i < mCount; i++)
+	{
+		if (mLinkedList[i] == searchKey) return true;
+	}
 	return false;
 }
 
-
-/*      Pre:  The list is instantiated and the searchKey is available
-*     Post:  If the searchKey exists, removes it from the list and the
-*            function returns true; otherwise the function does nothing
-*            and returns false
-*  Purpose:  To remove a specific value from the list
-*****************************************************************************/
+/*      Pre:  static linked list is initialized
+*     Post:  returns true if a removal of value is successful
+*  Purpose:  removes value from linked list
+*************************************************************************
 template <class T>
 bool DDLinkedList<T>::remove(T searchKey)
 {
-	if (!isExist(searchKey)) return false;
-	Node<T>* dNode; //node for deleting
-	Node<T>* prev; //node previous to node to be deleted
-	dNode = mHead;
-	if (mCount == 1)
+	int index = 0;
+	while (index < mCount)
 	{
-		mHead = NULL;
-		mTail = NULL;
-		delete dNode;
-		dNode = NULL;
-		mCount--;
-		return true;
+		if (mLinkedList[index] == searchKey) break;
+		index++;
 	}
-	else
+	if (index == mCount) return false;
+	for (int i = 0; i < mCount; i++)
 	{
-		//test for head
-		if (dNode->mData == searchKey)
-		{
-			mHead = dNode->mNext;
-			mHead->mPrev = NULL;
-			delete dNode;
-			dNode = NULL;
-			mCount--;
-			return true;
-		}
-		//test for tail
-		if (mTail->mData == searchKey)
-		{
-			dNode = mTail->mPrev;
-			delete mTail;
-			dNode->mNext = NULL;
-			mCount--;
-			return true;
-		}
-		//iterate to find
-		int found = false;
-		for (int i = 0; i < mCount; i++)
-		{
-			dNode = dNode->mNext;
-			if (dNode->mData == searchKey)
-			{
-				found = true;
-				break;
-			}
-		}
-		if (found)
-		{
-			dNode->mPrev->mNext = dNode->mNext;
-			dNode->mNext->mPrev = dNode->mPrev;
-			mCount--;
-			delete dNode;
-		}
-		return found;
+		mLinkedList[index] = mLinkedList[index + 1];
+		index++;
+		if (index == mCount) index = 0;
 	}
-
+	mCount--;
+	mRear--;
+	if (mRear == -1) mRear = mCapacity - 1;
+	return true;
 }
-
-
-/*      Pre:  The list is instantiated and the index is valid
-*     Post:  Remove the element in the specified index location and returns
-*            its content to the caller.  If the index location is invalid, the
-*            function returns the default value
-*  Purpose:  To remove an item in the specified index location
-*****************************************************************************/
+*/
+/*      Pre:  static linked list is initialized
+*     Post:  returns true if removal was successful
+*  Purpose:  removes a value at the provided virtual index
+*************************************************************************/
 template <class T>
-T DDLinkedList<T>::removeAt(int index)
+bool DDLinkedList<T>::removeAt(int index)
 {
-	T value;
-	if (index >= mCount || index < 0)
-	{
-		cout << "Index out of range..." << "\n";
-		system("pause");
+	if (index > mCount || index < 0){
+		cout << "index out of range...";
 		return false;
 	}
-	Node<T>* mNode;
-	//test for one node
-	if (mCount == 1 && index == 0)
+	if (mCount == 1)
 	{
-		value = mHead->mData;
-		delete mHead;
-		mHead = NULL;
-		mTail = NULL;
 		mCount--;
-		return value;
+		delete mLinkedList;
+		mLinkedList = NULL;
+		return true;
 	}
-	else if (index == 0)
+	T* mLinkedListTmp = new T[mCount - 1];
+	for (int i = 0; i < mCount; i++)
 	{
-		value = mHead->mData;
-		mNode = mHead;
-		mHead = mHead->mNext;
-		mHead->mPrev = NULL;
-		delete mNode;
-		mCount--;
-		return value;
+		if (i < index)
+		{
+			mLinkedListTmp[i] = mLinkedList[i];
+		}
+		else if (i > index)
+		{
+			mLinkedListTmp[i - 1] = mLinkedList[i];
+		}
 	}
-	if (index == mCount - 1)
-	{
-		value = mTail->mData;
-		mNode = mTail;
-		mTail = mTail->mPrev;
-		mTail->mNext = NULL;
-		delete mNode;
-		mCount--;
-		return value;
-	}
-	mNode = mHead;
-	for (int i = 0; i < index; i++)
-	{
-		mNode = mNode->mNext;
-	}
-	value = mNode->mData;
-	mNode->mPrev->mNext = mNode->mNext;
-	mNode->mNext->mPrev = mNode->mPrev;
-	delete mNode;
+	delete[] mLinkedList;
+	mLinkedList = mLinkedListTmp;
 	mCount--;
-	return value;
-}
-
-template <class T>
-bool DDLinkedList<T>::insert(T data, int index)
-{
-
-	Node<T>* node = new Node<T>(data);
-	Node<T>* prev = mHead;
-	if (index > mCount) return false;
-	if (index == mCount)
-	{
-		insert(data);
-		return true;
-	}
-	if (index == 0)
-	{
-		node->mNext = mHead;
-		mHead->mPrev = node;
-		mHead = node;
-		mCount++;
-		return true;
-	}
-	if (index == 1)
-	{
-		mHead->mNext->mPrev = node;
-		node->mNext = mHead->mNext;
-		mHead->mNext = node;
-		node->mPrev = mHead;
-		mCount++;
-		return true;
-	}
-	if (index == mCount - 1)
-	{
-		mTail->mPrev->mNext = node;
-		node->mPrev = mTail->mPrev;
-		mTail->mPrev = node;
-		node->mNext = mTail;
-		mCount++;
-		return true;
-	}
-	for (int i = 0; i < index - 1; i++)
-	{
-		prev = prev->mNext;
-	}
-	node->mNext = prev->mNext;
-	node->mPrev = prev;
-	node->mNext->mPrev = node;
-	prev->mNext = node;
-	mCount++;
 	return true;
 }
 
