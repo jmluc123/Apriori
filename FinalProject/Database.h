@@ -280,35 +280,46 @@ DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>
 		DDLinkedList<Candidate<T>*>* copyTracker = new DDLinkedList<Candidate<T>*>;
 		k = toCopy1->getCount() + 1;
 
+		//if (k > 2)
+		//	cout << i << " ";
+
 		//fill tmp with p x q
 		for (int j = i + 1; j < Lkp->getCount(); j++)
 		{
+			
 			Candidate<T>* toAdd = new Candidate<T>;
 			Candidate<T>* toCopy2 = Lkp->getData(j);
-			for (int g = 0; g < toCopy1->getCount(); g++)
+			for (int g = 0; g < toCopy2->getCount(); g++)
 			{//fill candidates 
-				toAdd->insert(toCopy1->getData(g));
+				if (toCopy1->getData(g) != toCopy2->getData(g))
+				{
+					toAdd->insert(toCopy1->getData(g));
+				}
 				toAdd->insert(toCopy2->getData(g));
+				
 			}
 
 			//only add if |tmp| = k and if nCp = k
+
+			
 			if (toAdd->getCount() == k)
-			{
+			{				
 				if (checkEquivalent(toAdd, tmp))
-				{
+				{					
 					tmp->insert(toAdd);
-					if (k > 2)
+					
+					if (k <= 2)
 						Ck->insert(toAdd);
+
 				}	
 				//also add it to tracker
 				copyTracker->insert(toAdd);
-			}
-			
-			
+			}			
 		}
 
 		if (k > 2)
 		{
+			
 			//prune while joining
 			for (int j = 0; j < tmp->getCount(); j++)
 			{//for each member of tmp
@@ -324,9 +335,11 @@ DDLinkedList<Candidate<T>*>* Database<T>::aprioriGen(DDLinkedList<Candidate<T>*>
 				if (copyCount >= k)
 					Ck->insert(tmp->getData(j));
 			}
+			
 		}
 
 		delete copyTracker;
+		
 	}
 	return Ck;
 }
