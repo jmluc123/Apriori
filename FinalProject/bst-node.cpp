@@ -17,10 +17,10 @@
 *     Post: a new node is initialized
 *  Purpose: create a new node for a BST
 ***************************************************************/
-BST_Node_Candidate::BST_Node_Candidate()
+BST_Node_Candidate::BST_Node_Candidate(int tolerance)
 {
 	//add your code
-	mCandidate = NULL;
+	bucket = new CandidateHashTable(tolerance);
 	mLeft = NULL;
 	mRight = NULL;
 }
@@ -29,35 +29,42 @@ BST_Node_Candidate::BST_Node_Candidate()
 
 BST_Node_Candidate::~BST_Node_Candidate()
 {
-
+	if (mLeft) delete mLeft;
+	if (mRight) delete mRight;
+	delete bucket;
 }
 
 
 void BST_Node_Candidate::add(Candidate<int>* candidate, BST_Node_Candidate* node)
 {
+	bool added;
 	if (node == NULL) return;
-	if (node->mCandidate == NULL) //root node with nothing in it.
+	if (node->bucket->contains(candidate)) //test if candidate is in the bucket
 	{
-		node->mCandidate = candidate;
 		return;
 	}
-	if (candidate->getData(0) < node->mCandidate->getData(0))
+	if (node->bucket->isEmpty()) //root node with nothing in it.
 	{
-		if (node->mLeft)
-			add(candidate, node->mLeft);
-		else
-			node->mLeft = new BST_Node_Candidate(candidate);
+		added = node->bucket->add(candidate);
+		return;
 	}
-	else if (candidate->getData(0) >= node->mCandidate->getData(0))
+	added = node->bucket->add(candidate); //Now try to add
+	if (!added) //if the bucket is full
 	{
-		if (candidate->compare(node->mCandidate)) //test if candidate is same as 
+		if (candidate->getData(0) < node->bucket->getCandidate(0)->getData(0)) //check left node
 		{
-			return;
+			if (node->mLeft)
+				add(candidate, node->mLeft);
+			else
+				node->mLeft = new BST_Node_Candidate(bucket->getSize(), candidate);
 		}
-		if (node->mRight)
-			add(candidate,node->mRight);
-		else
-			node->mRight = new BST_Node_Candidate(candidate);
+		else if (candidate->getData(0) >= node->bucket->getCandidate(0)->getData(0)) //check right node
+		{
+			if (node->mRight)
+				add(candidate, node->mRight);
+			else
+				node->mRight = new BST_Node_Candidate(bucket->getSize(), candidate);
+		}
 	}
 	return;
 }
@@ -67,7 +74,7 @@ bool BST_Node_Candidate::isExist(Candidate<int>* candidate, BST_Node_Candidate* 
 {
 	bool exists = false;
 	if (node == NULL) return false;
-	if (candidate->compare(mCandidate)) return true;
+	if (bucket->contains(candidate)) return true;
 	if (mLeft) exists = isExist(candidate, node->mLeft);
 	if (exists) return true;
 	if (mRight) exists = isExist(candidate, node->mRight);
@@ -80,10 +87,10 @@ bool BST_Node_Candidate::isExist(Candidate<int>* candidate, BST_Node_Candidate* 
 *     Post: a new node is initialized with a given value
 *  Purpose: create a new node with a chosen value for a BST
 ***************************************************************/
-BST_Node_Candidate::BST_Node_Candidate(Candidate<int>* candidate)
+BST_Node_Candidate::BST_Node_Candidate(int tolerance, Candidate<int>* candidate)
 {
 	//add your code
-	mCandidate = candidate;
+	bucket = new CandidateHashTable(tolerance, candidate);
 	mLeft = NULL;
 	mRight = NULL;
 }
@@ -92,9 +99,9 @@ BST_Node_Candidate::BST_Node_Candidate(Candidate<int>* candidate)
 *     Post: a new node is initialized for addition to a BST
 *  Purpose: initialize a new node with pre-attached nodes to a BST
 *****************************************************************/
-BST_Node_Candidate::BST_Node_Candidate(Candidate<int>* candidate, BST_Node_Candidate *left, BST_Node_Candidate *right)
+BST_Node_Candidate::BST_Node_Candidate(int tolerance, Candidate<int>* candidate, BST_Node_Candidate *left, BST_Node_Candidate *right)
 {
-	mCandidate = candidate;
+	bucket = new CandidateHashTable(tolerance, candidate);
 	mLeft = left;
 	mRight = right;
 }
@@ -102,7 +109,13 @@ BST_Node_Candidate::BST_Node_Candidate(Candidate<int>* candidate, BST_Node_Candi
 void BST_Node_Candidate::prune(Transaction<int>* transaction, DDLinkedList<Candidate<int>*>* CT, BST_Node_Candidate* node)
 {
 	if (node == NULL) return;
-	if (transaction->contains(node->mCandidate)) CT->insert(node->mCandidate);
+	for (int i = 0; i < bucket->getSize(); i++)
+	{
+		if (bucket->getCandidate(i))
+		{
+			if (transaction->contains(bucket->getCandidate(i))) CT->insert(bucket->getCandidate(i));
+		}
+	}
 	prune(transaction, CT, node->mLeft);
 	prune(transaction, CT, node->mRight);
 }

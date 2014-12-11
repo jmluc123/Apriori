@@ -19,19 +19,10 @@
 #include <string>
 #include <sstream>
 #include <windows.h>
+#include <cstddef>
+#include <bitset>
 
 using namespace std;
-
-#include "TimerSystem.h"
-#include "node.h"
-#include "queue.h"
-#include "ddlinkedlist.h"
-#include "candidate.h"
-#include "transaction.h"
-#include "bst-node.h"
-#include "hash_table.h"
-#include "database.h"
-
 
 //Various useful functions
 int aInsert(int *&structure, int data, int index, int capacity, int count);
@@ -40,6 +31,18 @@ bool isExist(int *&structure, int data, int capacity);
 void aDisplay(int *&structure, int count);
 void bubbleSort(int list[], int size);
 void reverseSort(int list[], int n);
+int push(int* myArray, int data, int count);
+
+#include "TimerSystem.h"
+#include "node.h"
+#include "queue.h"
+#include "ddlinkedlist.h"
+#include "candidate.h"
+#include "candidate_hash_table.h"
+#include "transaction.h"
+#include "bst-node.h"
+#include "hash_table.h"
+#include "database.h"
 
 void presentMain();
 

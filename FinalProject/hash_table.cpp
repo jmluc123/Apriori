@@ -25,7 +25,7 @@ BSTHashTable::BSTHashTable(int listSize)
 	bucket = new BST_Node_Candidate*[mSize];
 	for (int i = 0; i < mSize; i++)
 	{
-		bucket[i] = new BST_Node_Candidate();
+		bucket[i] = new BST_Node_Candidate(mSize);
 	}
 }
 

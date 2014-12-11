@@ -19,19 +19,20 @@
 template <typename T>
 class DDLinkedList
 {
-private:
+protected:
 	T* mLinkedList;
 	int mCount;
+	string mId;
 
 public:
-	DDLinkedList(int);
+	DDLinkedList(int, string);
 	DDLinkedList();
 	~DDLinkedList();
 	int getCount();
 	int getCapactity();
 	T getData(int index);
 	bool setData(int index, T data);
-
+	void setID(string id);
 	void clear();
 	void display();
 	bool insert(T);
@@ -40,6 +41,7 @@ public:
 	bool isExist(T searchKey);
 	bool remove(T searchKey);
 	bool removeAt(int);
+	bool ultraKill();
 	int insert(int *&structure, int data, int index, int capacity, int count);
 };
 
@@ -54,6 +56,20 @@ DDLinkedList<T>::DDLinkedList()
 	mCount = 0;
 }
 
+template <class T>
+DDLinkedList<T>::DDLinkedList(int id, string sId)
+{
+	string post = to_string(id);
+	mId = "Linked List" + sId + " " + post;
+	mLinkedList = NULL;
+	mCount = 0;
+}
+
+template <class T>
+void DDLinkedList<T>::setID(string id)
+{
+	mId = id;
+}
 /*      Pre:  Static linked list is initialized
 *     Post:  deletes static linked list array
 *  Purpose:  clean up before static linked list is deleted
@@ -85,7 +101,7 @@ T DDLinkedList<T>::getData(int index)
 	if (index < 0 || index >= mCount)
 	{
 		cout << "Index out of range";
-		return T();
+		return NULL;
 	}
 	return mLinkedList[index];
 }
@@ -292,6 +308,16 @@ bool DDLinkedList<T>::removeAt(int index)
 	delete[] mLinkedList;
 	mLinkedList = mLinkedListTmp;
 	mCount--;
+	return true;
+}
+
+template <typename T>
+bool DDLinkedList<T>::ultraKill()
+{
+	for (int i = 0; i < mCount; i++)
+	{
+		if (mLinkedList[i]) delete mLinkedList[i];
+	}
 	return true;
 }
 

@@ -45,6 +45,9 @@
     <ClInclude Include="hash_table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="candidate_hash_table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="functions.cpp">
@@ -60,6 +63,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="hash_table.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="candidate_hash_table.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

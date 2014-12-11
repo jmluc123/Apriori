@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="bst-node.h" />
     <ClInclude Include="candidate.h" />
+    <ClInclude Include="candidate_hash_table.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="ddlinkedlist.h" />
     <ClInclude Include="hash_table.h" />
@@ -89,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bst-node.cpp" />
+    <ClCompile Include="candidate_hash_table.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="hash_table.cpp" />
     <ClCompile Include="main.cpp" />

@@ -19,12 +19,13 @@
 class BST_Node_Candidate
 {
 public:
-	Candidate<int>* mCandidate;
+	CandidateHashTable* bucket;
+	//Candidate<int>* mCandidate;
 	BST_Node_Candidate *mLeft, *mRight;
 
-	BST_Node_Candidate();
-	BST_Node_Candidate(Candidate<int>* candidate);
-	BST_Node_Candidate(Candidate<int>* candidate, BST_Node_Candidate *left, BST_Node_Candidate *right);
+	BST_Node_Candidate(int tolerance);
+	BST_Node_Candidate(int tolerance, Candidate<int>* candidate);
+	BST_Node_Candidate(int tolerance, Candidate<int>* candidate, BST_Node_Candidate *left, BST_Node_Candidate *right);
 	void add(Candidate<int>* candidate, BST_Node_Candidate* node);
 	bool isExist(Candidate<int>* candidate, BST_Node_Candidate* node);
 	~BST_Node_Candidate();

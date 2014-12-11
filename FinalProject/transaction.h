@@ -148,26 +148,21 @@ T Transaction<T>::getItem(int index)
 template <typename T>
 bool Transaction<T>::contains(Candidate<T>* candidate)
 {
-	bool isIn;
-	bool allAreIn = true;
-	for (int i = 0; i < candidate->getCount(); i++)
+	bool allAreIn = false;
+	int itemsPresent = 0;
+	for (int i = 0; i < candidate->getCount(); i++)//for each item in candidate compare against transaction
 	{
-		isIn = false;
-		for (int c = 0; c < getCount(); c++)
+		for (int c = 0; c < getCount(); c++)//for every item in transaction if item in candidate is in transaction, return true
 		{
 			if (candidate->getData(i) == getItem(c))
 			{
-				isIn = true;
+				itemsPresent++;
 				break;
 			}
 		}
-		if (!isIn)
-		{
-			allAreIn = false;
-			break;
-		}
 	}
-	return allAreIn;
+	//if (itemsPresent != candidate->getCount()) cout << "returning False...\n";
+	return itemsPresent == candidate->getCount();
 }
 
 

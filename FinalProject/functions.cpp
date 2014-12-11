@@ -23,6 +23,27 @@ int aInsert(int *&structure, int data, int index, int capacity, int count)
 	return count;
 }
 
+int push(int* myArray, int data, int count)
+{
+	if (count == 0)
+	{
+		delete[] myArray;
+		myArray = new int[1];
+		myArray[0] = data;
+		return 1;
+	}
+	else
+	{
+		int* returnArray = new int[count + 1];
+		for (int i = 0; i < count; i++)
+		{
+			returnArray[i] = myArray[i];
+		}
+		returnArray[count] = data;
+		return count + 1;
+	}
+}
+
 /*      Pre:  array is initialized and information about the list size and data count is provided
 *     Post:  returns a new array with the provided index removed
 *  Purpose:  removes a avalue from the array
