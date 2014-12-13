@@ -29,9 +29,9 @@ void main()
 	delete ddlinkedlist;
 	*/
 	//database with 1000 transactions, an average of 4 items per transaction with 1000 distinct items at a confidence of .05
-	Database<int>* database = new Database<int>(1000, 10, 1000, 5); 
+	Database<int>* database = new Database<int>(10000, 10, 1000, 5); 
 	database->load();
-	database->apriori(3);
+	database->apriori(5);
 	system("pause");
 	delete database;
 }
